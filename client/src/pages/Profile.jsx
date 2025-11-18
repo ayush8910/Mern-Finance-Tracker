@@ -70,7 +70,6 @@ export default function Profile() {
     <div className="max-w-xl mx-auto p-6">
       <div className="flex justify-between items-center">
         <h2 className="text-2xl font-bold mb-4">Profile</h2>
-        {/* LOGOUT BUTTON */}
         <button
           onClick={logout}
           className="bg-red-600 text-white px-3 py-1 rounded-lg shadow hover:bg-red-700"

@@ -10,16 +10,15 @@ import dns from "dns";
 dotenv.config();
 dns.setDefaultResultOrder("ipv4first");
 
-// Create transporter using env configuration
 const transporter = nodemailer.createTransport({
   host: "smtp.gmail.com",
   port: 587,
-  secure: false, // STARTTLS
+  secure: false, 
   auth: {
     user: process.env.EMAIL_USER,
     pass: process.env.EMAIL_PASS,
   },
-  family: 4, // FORCE IPv4
+  family: 4, 
   tls: {
     rejectUnauthorized: false,
     minVersion: "TLSv1.2",
@@ -65,7 +64,7 @@ router.post('/signup', async (req, res) => {
     await user.save();
     const sent = await sendOtpEmail(email, code);
     if(!sent){
-      // still send response so frontend can show OTP input; developer can check server logs for OTP
+      // 
       return res.json({ message: 'Signup created, but email sending failed. Check server logs for OTP.' });
     }
     res.json({ message: 'Signup created. Verify the OTP sent to your email.' });

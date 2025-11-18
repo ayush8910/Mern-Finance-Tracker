@@ -10,7 +10,6 @@ export default function App() {
 
   return (
     <>
-      {/* SINGLE TOP NAVBAR */}
       <nav className="w-full bg-gray-900 text-white px-6 py-3 flex justify-between shadow">
         <div className="font-bold text-lg">Finance Tracker</div>
 
@@ -40,7 +39,6 @@ export default function App() {
         </div>
       </nav>
 
-      {/* ROUTES */}
       <div className="px-4 py-6">
         <Routes>
           <Route path="/" element={<Home />} />

@@ -31,7 +31,7 @@ export default function Home(){
     try{
       await API.post('/tx', { ...form, amount: Number(form.amount) });
       setForm({type:'income', description:'', amount:''});
-      setFilters({...filters, page:1}); // reload
+      setFilters({...filters, page:1}); 
     }catch(err){
       alert(err.response?.data?.message || err.message);
     }
@@ -41,7 +41,7 @@ export default function Home(){
     if(!confirm('Delete transaction?')) return;
     try{
       await API.delete('/tx/'+id);
-      setFilters({...filters}); // reload
+      setFilters({...filters}); 
     }catch(err){
       alert(err.response?.data?.message || err.message);
     }
@@ -76,12 +76,10 @@ export default function Home(){
 
       <hr/>
 
-      {/* FILTERS SECTION */}
       <h3 className="text-xl font-bold my-3">Filters</h3>
 
       <div className="flex flex-wrap gap-2 items-center bg-white shadow p-3 rounded-lg">
 
-  {/* Type Filter */}
   <select 
     value={filters.type} 
     onChange={e => setFilters({...filters, type: e.target.value})}
@@ -92,7 +90,6 @@ export default function Home(){
     <option value="expense">Expense</option>
   </select>
 
-  {/* Min Amount */}
   <input
     type="number"
     placeholder="Min Amount"
@@ -101,7 +98,6 @@ export default function Home(){
     className="border px-2 py-1 rounded"
   />
 
-  {/* Max Amount */}
   <input
     type="number"
     placeholder="Max Amount"
@@ -110,7 +106,6 @@ export default function Home(){
     className="border px-2 py-1 rounded"
   />
 
-  {/* Date From */}
   <input
     type="date"
     value={filters.dateFrom}
@@ -118,7 +113,6 @@ export default function Home(){
     className="border px-2 py-1 rounded"
   />
 
-  {/* Date To */}
   <input
     type="date"
     value={filters.dateTo}
@@ -126,7 +120,6 @@ export default function Home(){
     className="border px-2 py-1 rounded"
   />
 
-  {/* Sort */}
   <select 
     value={filters.sortBy} 
     onChange={e => setFilters({...filters, sortBy: e.target.value})}
@@ -149,7 +142,6 @@ export default function Home(){
 </div>
 
 
-      {/* FIXED THIS LINE ↓↓↓ */}
       <h3 className="text-xl font-bold mt-6 mb-2">Recent Transactions</h3>
 
       <table className="tx-table">

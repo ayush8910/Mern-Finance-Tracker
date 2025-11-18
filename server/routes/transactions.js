@@ -3,7 +3,6 @@ const router = express.Router();
 import auth from '../middleware/auth.js';
 import Transaction from '../models/Transaction.js';
 
-// Add transaction
 router.post('/', auth, async (req, res) => {
   try {
     const { type, description, amount, date } = req.body;
@@ -14,7 +13,6 @@ router.post('/', auth, async (req, res) => {
   } catch (err) { res.status(500).json({ message: err.message }); }
 });
 
-// Get transactions with filters, sorting, pagination
 router.get('/', auth, async (req, res) => {
   try {
     const userId = req.user.id;
@@ -52,7 +50,6 @@ router.get('/', auth, async (req, res) => {
   } catch (err) { res.status(500).json({ message: err.message }); }
 });
 
-// Delete transaction
 router.delete('/:id', auth, async (req, res) => {
   try {
     const tx = await Transaction.findById(req.params.id);

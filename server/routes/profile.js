@@ -10,16 +10,15 @@ import dns from "dns";
 dotenv.config();
 dns.setDefaultResultOrder("ipv4first");
 
-// Setup mailer (same as auth.js)
 const transporter = nodemailer.createTransport({
   host: "smtp.gmail.com",
   port: 587,
-  secure: false, // STARTTLS
+  secure: false, 
   auth: {
     user: process.env.EMAIL_USER,
     pass: process.env.EMAIL_PASS,
   },
-  family: 4, // FORCE IPv4
+  family: 4, 
   tls: {
     rejectUnauthorized: false,
     minVersion: "TLSv1.2",
@@ -53,13 +52,11 @@ router.post('/request-otp', auth, async(req,res)=>{
   res.json({message:'OTP sent'});
 });
 
-// Get profile
 router.get('/', auth, async (req, res) => {
   const user = await User.findById(req.user.id).select('-passwordHash -otp');
   res.json(user);
 });
 
-// Update profile (requires OTP)
 router.put('/update', auth, async (req, res) => {
   const { username, email, otp } = req.body;
   const user = await User.findById(req.user.id);
@@ -77,7 +74,6 @@ router.put('/update', auth, async (req, res) => {
   res.json({ message:'Updated' });
 });
 
-// Change password (requires OTP)
 router.post('/change-password', auth, async (req, res) => {
   const { oldPassword, newPassword, otp } = req.body;
   const user = await User.findById(req.user.id);
